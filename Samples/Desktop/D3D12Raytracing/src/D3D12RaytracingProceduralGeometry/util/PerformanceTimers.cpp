@@ -145,7 +145,7 @@ void GPUTimer::EndFrame(_In_ ID3D12GraphicsCommandList* commandList)
     // Resolve query for the current frame.
     static UINT resolveToFrameID = 0;
     UINT64 resolveToBaseAddress = resolveToFrameID * c_timerSlots * sizeof(UINT64);
-    commandList->ResolveQueryData(m_heap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, 0, c_timerSlots, m_buffer.Get(), resolveToBaseAddress);
+    commandList->ResolveQueryData(m_heap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, 0, 2, m_buffer.Get(), resolveToBaseAddress);
 
     // Grab read-back data for the queries from a finished frame m_maxframeCount ago.                                                           
     UINT readBackFrameID = (resolveToFrameID + 1) % (m_maxframeCount + 1);
